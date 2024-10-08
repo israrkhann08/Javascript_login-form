@@ -28,6 +28,7 @@
       .getElementById("submitData")
       .addEventListener("submit", function (event) {
         event.preventDefault();
+        const form = document.getElementById('submitData');
         const eml = document.getElementById("email").value;
         const pss = document.getElementById("password").value;
 
@@ -45,8 +46,14 @@
             if (!userFound) {
               alert("Invalid email or password");
             }
+
+            clearForm()
           })
           .catch((error) => console.error("Error fetching data:", error));
+
+          function clearForm (){
+            form.reset();
+          }
       });
   </script>
 </html>
