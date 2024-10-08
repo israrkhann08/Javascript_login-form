@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <form id="submitData">
+        <div class="item">
+          <input type="email" name="" id="email" placeholder="  Email" />
+        </div>
+
+        <div class="item">
+          <input type="tel" name="" id="password" placeholder="  password" />
+        </div>
+
+        <div class="item">
+          <button type="submit">SUBMIT</button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    document
+      .getElementById("submitData")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+        const eml = document.getElementById("email").value;
+        const pss = document.getElementById("password").value;
+
+        fetch("https://jsonplaceholder.typicode.com/users")
+          .then((response) => response.json())
+          .then((users) => {
+            let userFound = false; // Flag to track if user is found
+            for (let i = 0; i < users.length; i++) {
+              if (users[i].email === eml && users[i].phone === pss) {
+                alert("Successfully registered");
+                userFound = true; // Set flag when user is found
+                break; // Exit the loop
+              }
+            }
+            if (!userFound) {
+              alert("Invalid email or password");
+            }
+          })
+          .catch((error) => console.error("Error fetching data:", error));
+      });
+  </script>
+</html>
